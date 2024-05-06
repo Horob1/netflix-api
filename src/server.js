@@ -4,9 +4,12 @@ import 'dotenv/config'
 import exitHook from 'async-exit-hook'
 import { CONNEXT_DB, GET_DB, CLOSE_DB } from '~/config/mongodb'
 import { env } from '~/config/environment'
+import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware'
 
 const START_SERVER = () => {
   const app = express()
+
+  app.use(errorHandlingMiddleware)
 
   app.get('/', (req, res) => {
     console.log(GET_DB())
@@ -14,7 +17,7 @@ const START_SERVER = () => {
   })
 
   app.listen(env.APP_PORT, env.APP_HOST, () => {
-    console.log(`I am running at ${ env.APP_HOST }:${ env.APP_PORT }/`)
+    console.log(`I am running at http://${ env.APP_HOST }:${ env.APP_PORT }/`)
   })
 
   exitHook(() => {
