@@ -5,10 +5,12 @@ import exitHook from 'async-exit-hook'
 import { CONNEXT_DB, GET_DB, CLOSE_DB } from '~/config/mongodb'
 import { env } from '~/config/environment'
 import { errorHandlingMiddleware } from '~/middlewares/errorHandlingMiddleware'
+import { API_V1 } from './routes/v1'
 
 const START_SERVER = () => {
   const app = express()
 
+  app.use('/api/v1', API_V1)
   app.use(errorHandlingMiddleware)
 
   app.get('/', (req, res) => {
