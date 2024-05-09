@@ -5,7 +5,7 @@ const createFilm = async (data) => {
   try {
     const newData = {
       ...data,
-      slug: slugify(data.title)
+      slug: slugify(data?.title)
     }
 
     return filmModel.createFilm(newData)

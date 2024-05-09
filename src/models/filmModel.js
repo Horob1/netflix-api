@@ -11,8 +11,8 @@ const FILM_COLLECTION_SCHEMA = joi.object({
   genres: joi.array().items(joi.string().required().trim().strict().valid(...Constants.genres)),
   tag: joi.array().items(joi.string().required().trim().strict()),
   cast: joi.object({
-    actor: joi.array().items(joi.pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([]),
-    director: joi.array().items(joi.pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([])
+    actor: joi.array().items(joi.string().pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([]),
+    director: joi.array().items(joi.string().pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([])
   }),
   runtime_minutes: joi.string().required().trim().strict(),
   poster_url: joi.string().required().trim().strict(),

@@ -9,6 +9,7 @@ import { API_V1 } from './routes/v1'
 
 const START_SERVER = () => {
   const app = express()
+  app.use(express.json())
 
   app.use('/api/v1', API_V1)
   app.use(errorHandlingMiddleware)

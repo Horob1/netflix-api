@@ -1,5 +1,5 @@
 import joi from 'joi'
-import { StatusCode } from 'http-status-codes'
+import { StatusCodes } from 'http-status-codes'
 import { OBJECT_ID_RULE, OBJECT_ID_RULE_MESSAGE } from '~/utils/validators'
 import { Constants } from '~/utils/constants'
 import ApiError from '~/utils/ApiError'
@@ -12,8 +12,8 @@ const createFilm = async (req, res, next) => {
     genres: joi.array().items(joi.string().required().trim().strict().valid(...Constants.genres)),
     tag: joi.array().items(joi.string().required().trim().strict()),
     cast: joi.object({
-      actor: joi.array().items(joi.pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([]),
-      director: joi.array().items(joi.pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([])
+      actor: joi.array().items(joi.string().pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([]),
+      director: joi.array().items(joi.string().pattern(OBJECT_ID_RULE).message(OBJECT_ID_RULE_MESSAGE)).default([])
     }),
     runtime_minutes: joi.string().required().trim().strict(),
     average_rating: joi.number().required(),
@@ -34,7 +34,7 @@ const createFilm = async (req, res, next) => {
     next()
   } catch (error) {
     const errorMessage = new Error(error).message
-    const newError = new ApiError(StatusCode.UNPROCESSABLE_ENTITY, errorMessage)
+    const newError = new ApiError(StatusCodes.UNPROCESSABLE_ENTITY, errorMessage)
     next(newError)
   }
 

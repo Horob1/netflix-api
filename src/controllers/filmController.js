@@ -3,7 +3,7 @@ import { filmService } from '~/services/filmService'
 
 const createFilm = async (req, res, next) => {
   try {
-    const createdFilm= await filmService.createFilm(req.body)
+    const createdFilm = await filmService.createFilm(req.body)
     res.status(StatusCodes.CREATED).json(createdFilm)
   } catch (error) {
     next(error)
